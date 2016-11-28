@@ -12,7 +12,7 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
   "Routes" should {
 
     "send 404 on a bad request" in  {
-      route(app, FakeRequest(GET, "/boum")).map(status(_)) mustBe Some(NOT_FOUND)
+      route(app, FakeRequest(GET, "/boum")).map(status) mustBe Some(NOT_FOUND)
     }
 
   }
@@ -25,6 +25,18 @@ class ApplicationSpec extends PlaySpec with OneAppPerTest {
       status(home) mustBe OK
       contentType(home) mustBe Some("text/plain")
       contentAsString(home) must include ("Hello")
+    }
+
+  }
+
+  "AsyncController" should {
+
+    "show pages loading time results" in {
+      val result = route(app, FakeRequest(GET, "/pagesLoadingTime")).get
+
+      status(result) mustBe OK
+      contentType(result) mustBe Some("text/plain")
+      contentAsString(result) must include("http://")
     }
 
   }
