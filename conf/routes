@@ -4,3 +4,4 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
+GET     /pagesLoadingTime           controllers.AsyncController.pagesLoadingTime
